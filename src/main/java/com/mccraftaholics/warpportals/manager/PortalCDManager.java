@@ -131,7 +131,7 @@ public class PortalCDManager {
 		newPortalInfo.name = portalName;
 		newPortalInfo.tpCoords = tpCoords;
 		newPortalInfo.blockCoordArray = blockCoordsArray;
-		
+
 		/*
 		 * Trigger WarpPortalCreateEvent so that other plugins can tie in to new
 		 * WarpPortal creations
@@ -139,7 +139,7 @@ public class PortalCDManager {
 		WarpPortalsCreateEvent wpCreateEvent = new WarpPortalsCreateEvent(sender, newPortalInfo);
 		// Call WarpPortalsTeleportEvent
 		Bukkit.getPluginManager().callEvent(wpCreateEvent);
-		
+
 		// Check if the WarpPortalCreateEvent has been cancelled
 		if (!wpCreateEvent.isCancelled()) {
 			PortalInfo createPortalInfo = wpCreateEvent.getPortal();
@@ -164,7 +164,7 @@ public class PortalCDManager {
 
 	/**
 	 * Change the material of the block at each Coords in blockCoordArray.
-	 * 
+	 *
 	 * @param material
 	 *            - Material to change the block to. Must be a block.
 	 *            {@link Material#isBlock()}

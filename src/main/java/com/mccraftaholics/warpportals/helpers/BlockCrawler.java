@@ -33,11 +33,11 @@ public class BlockCrawler {
 		if (block != null && block.getType() == type) {
 			if (!mProcessedBlocks.contains(new Coords(block))) {
 				mProcessedBlocks.add(new Coords(block));
-				for (int i = 0; i < ADJ_LOC.length; i++) {
+				for (int[] ints : ADJ_LOC) {
 					Location nextLoc = block.getLocation();
-					nextLoc.setX(block.getX() + ADJ_LOC[i][0]);
-					nextLoc.setY(block.getY() + ADJ_LOC[i][1]);
-					nextLoc.setZ(block.getZ() + ADJ_LOC[i][2]);
+					nextLoc.setX(block.getX() + ints[0]);
+					nextLoc.setY(block.getY() + ints[1]);
+					nextLoc.setZ(block.getZ() + ints[2]);
 					if (mProcessedBlocks.size() < mMaxPortalSize)
 						processAdjacent(nextLoc.getBlock(), block.getType());
 					else
