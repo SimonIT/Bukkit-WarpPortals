@@ -1,0 +1,24 @@
+language: java
+jdk:
+  - openjdk8
+  - openjdk11
+
+before_deploy:
+  - mvn package
+
+deploy:
+  provider: releases
+  pre-release: true
+  skip_cleanup: true
+  api_key: ${GH_TOKEN}
+  file_glob: true
+  file: target/Bukkit-WarpPortals-*.jar
+  on:
+    repo: SimonIT/Bukkit-WarpPortals
+    tags: true
+    all_branches: true
+
+cache:
+  directories:
+    - .autoconf
+    - $HOME/.m2
