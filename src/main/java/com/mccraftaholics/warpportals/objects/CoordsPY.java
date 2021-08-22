@@ -9,7 +9,7 @@ public class CoordsPY {
 	public double x, y, z;
 	public float pitch, yaw;
 	public World world;
-	
+
 	public String getWorldName() {
 		if (world != null)
 			return world.getName();
@@ -38,11 +38,11 @@ public class CoordsPY {
 		if (t.matches("\\(.+,-*[0-9]+\\.*[0-9]*,-*[0-9]+\\.*[0-9]*,-*[0-9]+\\.*[0-9]*,-*[0-9]+\\.*[0-9]*,-*[0-9]+\\.*[0-9]*\\)")) {
 			String n = coordsString.substring(1, coordsString.length() - 1);
 			String[] s = n.split(",");
-			
+
 			world = Bukkit.getWorld(s[0]);
 			if (world == null)
 				throw NullWorldException.createForWorldName(s[0]);
-			
+
 			x = Double.parseDouble(s[1]);
 			y = Double.parseDouble(s[2]);
 			z = Double.parseDouble(s[3]);
@@ -66,22 +66,20 @@ public class CoordsPY {
 			return false;
 		else {
 			CoordsPY crd = (CoordsPY) obj;
-			if (crd.getWorldName().equals(this.getWorldName()) && crd.x == this.x && crd.y == this.y && crd.z == this.z && crd.pitch == this.pitch
-					&& crd.yaw == this.yaw)
-				return true;
-			return false;
+			return crd.getWorldName().equals(this.getWorldName()) && crd.x == this.x && crd.y == this.y && crd.z == this.z && crd.pitch == this.pitch
+					&& crd.yaw == this.yaw;
 		}
 	}
 
 	public String toString() {
-		return "(" + getWorldName() + "," + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z) + "," + String.valueOf(pitch) + ","
-				+ String.valueOf(yaw) + ")";
+		return "(" + getWorldName() + "," + x + "," + y + "," + z + "," + pitch + ","
+				+ yaw + ")";
 	}
 
 	public String toNiceString() {
-		return "(" + getWorldName() + ", " + String.valueOf(Math.floor(x)) + ", " + String.valueOf(Math.floor(y)) + ", " + String.valueOf(Math.floor(z)) + ")";
+		return "(" + getWorldName() + ", " + Math.floor(x) + ", " + Math.floor(y) + ", " + Math.floor(z) + ")";
 	}
-	
+
 	public CoordsPY clone() {
 		return new CoordsPY(this.world, this.x, this.y, this.z, this.pitch, this.yaw);
 	}

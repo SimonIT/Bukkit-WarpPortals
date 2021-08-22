@@ -103,7 +103,7 @@ public class PortalCDManager {
 							 * create overlaps "..." portals.
 							 */
 							player.sendMessage(mCC + "Portal \"" + portalCreate.portalName + "\" could not be created because it overlapped existing portals: "
-									+ existingPortalOverlap.toString() + ".");
+									+ existingPortalOverlap + ".");
 						}
 					} catch (MaxRecursionException e) {
 						/*
@@ -111,7 +111,7 @@ public class PortalCDManager {
 						 * create has reached max recursion size
 						 */
 						player.sendMessage(mCC + "Portal \"" + portalCreate.portalName
-								+ "\" could not be created because it was larger than the max Portal size of " + String.valueOf(maxPortalSize) + ".");
+								+ "\" could not be created because it was larger than the max Portal size of " + maxPortalSize + ".");
 					}
 				} else {
 					player.sendMessage(mCC + "There was an error using that Portal name. It wasn't a valid alpha-numeric string.");

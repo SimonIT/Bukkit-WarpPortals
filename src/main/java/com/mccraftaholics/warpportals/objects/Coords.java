@@ -61,14 +61,12 @@ public class Coords {
 			return false;
 		else {
 			Coords crd = (Coords) obj;
-			if (crd.world.getName().equals(this.world.getName()) && crd.x == this.x && crd.y == this.y && crd.z == this.z)
-				return true;
-			return false;
+			return crd.world.getName().equals(this.world.getName()) && crd.x == this.x && crd.y == this.y && crd.z == this.z;
 		}
 	}
 
 	public String toString() {
-		return "(" + world.getName() + "," + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z) + ")";
+		return "(" + world.getName() + "," + x + "," + y + "," + z + ")";
 	}
 
 	public Coords clone() {

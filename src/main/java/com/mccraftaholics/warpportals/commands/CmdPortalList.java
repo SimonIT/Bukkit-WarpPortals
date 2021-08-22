@@ -43,8 +43,18 @@ public class CmdPortalList extends CommandHandlerObject {
 			if (destText == null)
 				destText = portalInfo.tpCoords.toNiceString();
 			try {
-				sblist.append(ChatColor.WHITE + "\n - " + ChatColor.RED + portalName + ChatColor.YELLOW + " ("
-						+ portalInfo.blockCoordArray.get(0).world.getName() + ") " + ChatColor.WHITE + "-> " + ChatColor.AQUA + destText);
+				sblist.append(ChatColor.WHITE)
+						.append("\n - ")
+						.append(ChatColor.RED)
+						.append(portalName)
+						.append(ChatColor.YELLOW)
+						.append(" (")
+						.append(portalInfo.blockCoordArray.get(0).world.getName())
+						.append(") ")
+						.append(ChatColor.WHITE)
+						.append("-> ")
+						.append(ChatColor.AQUA)
+						.append(destText);
 			} catch (Exception e) {
 				// Catches exceptions when blockCoordArray is 0 in length
 			}

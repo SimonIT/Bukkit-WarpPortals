@@ -49,7 +49,7 @@ public class PersistanceManager {
 			Yaml yaml = new Yaml();
 
 			// Generate Java Data-Structure from YAML
-			LinkedHashMap<String, LinkedHashMap<String, ?>> yamlData = (LinkedHashMap<String, LinkedHashMap<String, ?>>) yaml.load(data);
+			LinkedHashMap<String, LinkedHashMap<String, ?>> yamlData = yaml.load(data);
 
 			// Loop through Portals then Destinations
 			for (Entry<String, LinkedHashMap<String, ?>> dataGroup : yamlData.entrySet()) {
@@ -110,8 +110,8 @@ public class PersistanceManager {
 					}
 				}
 			}
-			mLogger.info(String.valueOf(portalIM.getPortalCount()) + " Portals loaded!");
-			mLogger.info(String.valueOf(destMap.size()) + " Destinations loaded!");
+			mLogger.info(portalIM.getPortalCount() + " Portals loaded!");
+			mLogger.info(destMap.size() + " Destinations loaded!");
 
 			if (needToBackup) {
 				try {
@@ -120,12 +120,11 @@ public class PersistanceManager {
 					File backupFile = new File(mPlugin.getDataFolder(), backupName);
 					backupFile.createNewFile();
 
-					StringBuilder sb = new StringBuilder();
-					sb.append("# I highly recommend that you don't edit this manually!");
-					sb.append("Backup was created due to a world being deleted.");
-					sb.append(data);
+					String sb = "# I highly recommend that you don't edit this manually!" +
+							"Backup was created due to a world being deleted." +
+							data;
 
-					saveStringToFile(sb.toString(), backupFile);
+					saveStringToFile(sb, backupFile);
 				} catch (Exception e) {
 					mLogger.severe("Can't backup WarpPortals data! " + e.getMessage());
 				}
@@ -143,7 +142,7 @@ public class PersistanceManager {
 
 	public void loadDataFileOld(PortalDataManager portalIM, HashMap<String, CoordsPY> destMap, File dataFile) throws IOException, ClassCastException {
 		String data = Utils.readFile(dataFile.getAbsolutePath(), Charset.forName("UTF-8"));
-		if (data != null && !data.matches("")) {
+		if (!data.matches("")) {
 			String[] initS = data.split("\n");
 			String[] groups = Utils.ymlLevelCleanup(initS, "  ");
 			for (String group : groups) {
@@ -175,7 +174,7 @@ public class PersistanceManager {
 							}
 						}
 					} else if (group.contains("destinations")) {
-						String[] dests = group.split("\n  ");
+						String[] dests = group.split("\n {2}");
 						for (String dest : dests) {
 							if (!dest.contains("destinations")) {
 								String destt = dest.trim();
